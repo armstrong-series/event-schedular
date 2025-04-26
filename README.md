@@ -31,7 +31,6 @@
 
 ## Setup
  <p>Setup your project base Url i.e {{baseUrl}} on postman. Import the API collection in collections/ directory in the project root folder into your postman. Set your authorization header to accept application/json, and Authorization as bearer token which is your auth token</p>
- <p>Set your mail stmp credentials on your .env</p>
 
 ### Clone the Repository
 ```bash
@@ -53,6 +52,12 @@ Manager User <br>
 email : eleanor.armstrong@glimpsemedia.co <br>
 password: password
 <p>In the databse the roles(admin, manager, user) has been seeded</p>
+
+###  API Public Collection
+
+    Access the Postman collection link below: 
+   https://api.postman.com/collections/39268478-e0c7afbf-ce19-4a61-8a1b-763a81d36ed7?access_key=PMAT-01JSRYK6A1N44T0HR6FY3MBGR7
+
 
 ### Run Tests
 

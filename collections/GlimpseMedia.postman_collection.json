@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "e0c7afbf-ce19-4a61-8a1b-763a81d36ed7",
+		"name": "GlimpseMedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39268478",
+		"_collection_link": "https://interstellar-spaceship-492620.postman.co/workspace/BinadaHoldings~c75ce571-4205-4922-8939-5ab9d45b709e/collection/39268478-e0c7afbf-ce19-4a61-8a1b-763a81d36ed7?action=share&source=collection_link&creator=39268478"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eleanor.armstrong@glimpsemedia.co\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Participants",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dsaW1wc2VtZWRpYS50ZXN0L2F1dGgvc2lnbmluIiwiaWF0IjoxNzQ1Njc2NDY5LCJleHAiOjE3NDU2ODAwNjksIm5iZiI6MTc0NTY3NjQ2OSwianRpIjoiQ0I2dFlnYklOVjNZbVBQOSIsInN1YiI6IjAxOTY2ZjU1LTc1MjMtNzA1My1hN2U5LTA0MmEyODljYWUzMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d87zQ9G0YUxjX18h4XK-Cq8ZyoASMK3xqDPLTbzUL3Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"event_id\": \"0196726b-f8cf-71bc-864e-318338984ac1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/participant/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"participant",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dsaW1wc2VtZWRpYS50ZXN0L2F1dGgvc2lnbmluIiwiaWF0IjoxNzQ1Njc2MzI5LCJleHAiOjE3NDU2Nzk5MjksIm5iZiI6MTc0NTY3NjMyOSwianRpIjoiUnBXUURDVVpIeWptWWRaZiIsInN1YiI6IjAxOTY2ZjU1LTc1MWYtNzNmMy1iNTg3LWQxOTY4YzczNjk2ZSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DrOhEraFxWjk15jmZRL41iM-j5wQ_kPMsACkEPDi6eI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Careers Google Africa\",\n    \"start_time\": \"2025-09-11 09:00:00\",\n    \"end_time\": \"2025-09-22 17:00:00\",\n    \"max_participants\": 2\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events/schedule",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Events",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dsaW1wc2VtZWRpYS50ZXN0L2F1dGgvc2lnbmluIiwiaWF0IjoxNzQ1Njc2NDY5LCJleHAiOjE3NDU2ODAwNjksIm5iZiI6MTc0NTY3NjQ2OSwianRpIjoiQ0I2dFlnYklOVjNZbVBQOSIsInN1YiI6IjAxOTY2ZjU1LTc1MjMtNzA1My1hN2U5LTA0MmEyODljYWUzMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d87zQ9G0YUxjX18h4XK-Cq8ZyoASMK3xqDPLTbzUL3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2dsaW1wc2VtZWRpYS50ZXN0L2F1dGgvc2lnbmluIiwiaWF0IjoxNzQ1Njc2NDY5LCJleHAiOjE3NDU2ODAwNjksIm5iZiI6MTc0NTY3NjQ2OSwianRpIjoiQ0I2dFlnYklOVjNZbVBQOSIsInN1YiI6IjAxOTY2ZjU1LTc1MjMtNzA1My1hN2U5LTA0MmEyODljYWUzMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d87zQ9G0YUxjX18h4XK-Cq8ZyoASMK3xqDPLTbzUL3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
