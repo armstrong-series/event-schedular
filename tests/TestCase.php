@@ -14,8 +14,8 @@ abstract class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
 
-    public const EVENT_URL = '/events';
-    public const AUTH_URL = '/auth';
+    public const eventUrl = '/events';
+    public const authUrl = '/auth';
 
     protected RoleService $roleService;
     protected function setUp(): void

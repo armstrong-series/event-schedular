@@ -31,7 +31,7 @@ class AuthTest extends TestCase
         );
 
 
-        $response = $this->postJson(self::AUTH_URL .'/signin', [
+        $response = $this->postJson(self::authUrl .'/signin', [
             'email'    => $user->email,
             'password' => 'password123',
         ]);
@@ -73,7 +73,7 @@ class AuthTest extends TestCase
             'status'   => 'active',
             'role_id'  => $role->id,
         ]);
-        $response = $this->postJson(self::AUTH_URL .'/signin', [
+        $response = $this->postJson(self::authUrl .'/signin', [
             'email'    => $user->email,
             'password' => 'wrong-password',
         ]);
@@ -82,7 +82,7 @@ class AuthTest extends TestCase
             ->assertJson([
                 'status' => false,
                 'message' => 'Invalid credentials!',
-                'data' => [],
+                'data'    => [],
             ]);
     }
 }

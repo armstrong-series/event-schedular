@@ -15,7 +15,7 @@ class EventTest extends TestCase
      * A basic feature test example.
      */
 
-    public function testAuthorizedEventCreate()
+    public function testAuthorizedEventSchedule()
     {
 
         $admin = self::createUserWithRole('admin');
@@ -30,7 +30,7 @@ class EventTest extends TestCase
         ];
 
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
-            ->postJson(self::EVENT_URL . '/schedule', $payload)
+            ->postJson(self::eventUrl . '/schedule', $payload)
             ->assertCreated();
 
         $this->assertDatabaseHas('events', [
@@ -50,7 +50,7 @@ class EventTest extends TestCase
     }
 
 
-    public function testUnauthorizedEventCreate()
+    public function testUnauthorizedEventSchedule()
     {
         $user = self::createUserWithRole('user');
         $token = self::authToken($user);
@@ -64,7 +64,7 @@ class EventTest extends TestCase
         ];
 
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
-            ->postJson(self::EVENT_URL . '/schedule', $payload);
+            ->postJson(self::eventUrl . '/schedule', $payload);
 
 
         $response->assertForbidden()
@@ -92,7 +92,7 @@ class EventTest extends TestCase
         $token = self::authToken($user);
 
         $this->withHeaders(['Authorization' => "Bearer $token"])
-            ->getJson(self::EVENT_URL . "/{$event->id}")
+            ->getJson(self::eventUrl . "/{$event->id}")
             ->assertSuccessful()
             ->assertJson([
                 'status' => true,
@@ -116,7 +116,7 @@ class EventTest extends TestCase
         $token = self::authToken($adminUser);
 
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
-            ->getJson(self::EVENT_URL);
+            ->getJson(self::eventUrl);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -172,7 +172,7 @@ class EventTest extends TestCase
 
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
             ->postJson(
-                self::EVENT_URL . "/participant/register",
+                self::eventUrl . "/participant/register",
                 [
                     'event_id' => $finalEvent->id
                 ]
