@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Events\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class EventTest extends TestCase
 {
@@ -65,7 +66,7 @@ class EventTest extends TestCase
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
             ->postJson(self::EVENT_URL . '/schedule', $payload);
 
-        
+
         $response->assertForbidden()
             ->assertJson([
                 'message' => 'Only admin, manager authorized action!',
@@ -99,10 +100,10 @@ class EventTest extends TestCase
                 'data' => [
                     'id'         => (string) $event->id,
                     'name'       => 'Gymnasium 2029',
-                    'start_time' => '2025-05-01 09:00:00',
-                    'end_time'   => '2025-05-01 17:00:00',
+                    'start_time' => $event->start_time->toIso8601String(),
+                    'end_time'   => $event->end_time->toIso8601String(),
                     "max_participants"     => $event->max_participants,
-                    "current_participants" => 0,  
+                    "current_participants" => 0,
                 ],
             ]);
     }
@@ -119,7 +120,7 @@ class EventTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'success' => true,
+                'status' => true,
                 'message' => 'Request completed!',
             ])
             ->assertJsonStructure([
@@ -141,7 +142,7 @@ class EventTest extends TestCase
                 ],
             ]);
 
-        $this->assertEquals(15, $response->json('data.meta.total'));
+        $this->assertEquals(4, $response->json('data.meta.total'));
     }
 
 
@@ -150,18 +151,19 @@ class EventTest extends TestCase
         $user = self::createUserWithRole('user');
         $token = self::authToken($user);
 
-        $event1 = Event::factory()->create([
+        $initialEvent = Event::factory()->create([
             'start_time' => '2025-05-01 09:00:00',
             'end_time'   => '2025-05-01 12:00:00',
         ]);
-        $event2 = Event::factory()->create([
+        $finalEvent = Event::factory()->create([
             'start_time' => '2025-05-01 11:00:00',
-            'end_time' => '2025-05-01 14:00:00',
+            'end_time'   => '2025-05-01 14:00:00',
         ]);
 
         DB::table('registrations')->insert(
             [
-                'event_id'   => $event1->id,
+                'id'         => Str::uuid(),
+                'event_id'   => $initialEvent->id,
                 'user_id'    => $user->id,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -169,9 +171,24 @@ class EventTest extends TestCase
         );
 
         $response = $this->withHeaders(['Authorization' => "Bearer $token"])
-            ->postJson(self::EVENT_URL . "/{$event2->id}/register", ['event_id' => $event2->id]);
+            ->postJson(
+                self::EVENT_URL . "/participant/register",
+                [
+                    'event_id' => $finalEvent->id
+                ]
+            );
 
         $response->assertStatus(422)
-            ->assertJson(['success' => false]);
+            ->assertJson(
+                [
+                    'status' => false,
+                    'message' => 'Validation errors',
+                    'errors' => [
+                        'event_id' => [
+                            'You are already registered for an overlapping event.'
+                        ]
+                    ]
+                ]
+            );
     }
 }

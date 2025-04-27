@@ -9,7 +9,7 @@
 - Nginx (Server)
 
 ## Architecture Layer
-<p>This is MVC pattern with Service, Contract and Query Layer. The Query layer serves for encapsulation of database queries outside the service logic. This make the structure reusable and easily modifiable<p>
+<p>This is MVC pattern with Service, Contract and Query Layer(SOLID Principles). The Query layer serves for encapsulation of database queries outside the service logic. This make the structure reusable and easily modifiable<p>
 
 ## Routes 
 <p>API Routes are mapped in bootstrap/app.php for easy maintenance. So each routes is prefixed semantically to its used case. For laravel 10x it can be achieved in App/Providers/RouteServiceProvider</p>
@@ -60,10 +60,10 @@ password: password
 
 
 ### Run Tests
-
 ```bash
 php artisan test
 ```
+<p> NB: Ensure SQLite and its driver is installed in your system and server</p>
 
 
 
